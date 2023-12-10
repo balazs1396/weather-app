@@ -6,7 +6,8 @@ class RequestService
 {
     public static $instance;
 
-    public static function getInstance() {
+    public static function getInstance(): RequestService
+    {
         if ( !(self::$instance instanceof self) ) {
             self::$instance = new self();
         }

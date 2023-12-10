@@ -7,7 +7,8 @@ class OpenWeatherApiService
 {
     public static $instance;
 
-    public static function getInstance() {
+    public static function getInstance(): OpenWeatherApiService
+    {
         if ( !(self::$instance instanceof self) ) {
             self::$instance = new self();
         }

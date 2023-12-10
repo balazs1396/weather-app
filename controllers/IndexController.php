@@ -10,7 +10,9 @@ class IndexController
 
         $cities = FileProcessor::getCities();
 
-        WeatherService::getInstance()->appendCitiesWithWeatherDetails($searchFields, $cities);
+        $weatherService = WeatherService::getInstance();
+        $weatherService->appendCitiesWithWeatherDetails($searchFields, $cities);
+        $weatherService->sortCitiesByTemperatureSpread($cities);
 
         include 'views/index.php';
     }

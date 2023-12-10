@@ -8,7 +8,8 @@ class WeatherService
 {
     public static $instance;
 
-    public static function getInstance() {
+    public static function getInstance(): WeatherService
+    {
         if ( !(self::$instance instanceof self) ) {
             self::$instance = new self();
         }
@@ -16,7 +17,12 @@ class WeatherService
         return self::$instance;
     }
 
-    public function appendCitiesWithWeatherDetails(array $searchFields, array &$cities)
+    /**
+     * @param array $searchFields
+     * @param array $cities
+     * @return void
+     */
+    public function appendCitiesWithWeatherDetails(array $searchFields, array &$cities): void
     {
         foreach ($cities as &$city) {
             $weather = $this->getWeatherByCoordinates((float)$city['latitude'], (float)$city['longitude']);
@@ -32,12 +38,42 @@ class WeatherService
         }
     }
 
+    /**
+     * @param array<WeatherDetails> $cities
+     * @return void
+     */
+    public function sortCitiesByTemperatureSpread(array &$cities): void
+    {
+        usort($cities, function($a, $b) {
+            $diffA = $a['tempMax'] - $a['tempMin'];
+            $diffB = $b['tempMax'] - $b['tempMin'];
+
+            if ($diffA == $diffB) {
+                return 0;
+            }
+
+            return ($diffA < $diffB) ? -1 : 1;
+        });
+    }
+
+    /**
+     * @param float $latitude
+     * @param float $longitude
+     * @return WeatherDetails
+     */
     private function getWeatherByCoordinates(float $latitude, float $longitude): WeatherDetails
     {
         return OpenWeatherApiService::getInstance()->getWeatherByCoordinates($latitude, $longitude);
     }
 
-    public function addDistanceFromSearchFieldsToWeather(WeatherDetails &$weather, array $searchFields, float $latitude, float $longitude)
+    /**
+     * @param WeatherDetails $weather
+     * @param array $searchFields
+     * @param float $latitude
+     * @param float $longitude
+     * @return void
+     */
+    public function addDistanceFromSearchFieldsToWeather(WeatherDetails &$weather, array $searchFields, float $latitude, float $longitude): void
     {
         if (!$searchFields) {
             return;
@@ -51,7 +87,14 @@ class WeatherService
         );
     }
 
-    private function measureDistanceFromSearchFields(?float $fromLatitude, ?float $fromLongitude, float $toLatitude, float $toLongitude)
+    /**
+     * @param float|null $fromLatitude
+     * @param float|null $fromLongitude
+     * @param float $toLatitude
+     * @param float $toLongitude
+     * @return float|int|null
+     */
+    private function measureDistanceFromSearchFields(?float $fromLatitude, ?float $fromLongitude, float $toLatitude, float $toLongitude): float|int|null
     {
         if (!$fromLatitude || !$fromLongitude) {
             return null;
@@ -63,6 +106,6 @@ class WeatherService
         $distanceCalculator = new DistanceCalculator($fromCoordinates, $toCoordinates);
         $distance = $distanceCalculator->get();
 
-        return $distance->asKilometres();
+        return round($distance->asKilometres(), 2);
     }
 }
