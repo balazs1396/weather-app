@@ -8,6 +8,8 @@ class IndexController
     {
         $cities = FileProcessor::getCities();
 
+        WeatherService::getInstance()->appendCitiesWithWeatherDetails($cities);
+
         include 'views/index.php';
     }
 }

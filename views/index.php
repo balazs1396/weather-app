@@ -11,21 +11,27 @@
         <table class="table">
             <thead><!DOCTYPE html>
             <tr>
-                <th>Country</th>
-                <th>Zip</th>
-                <th>City</th>
-                <th>Longitude</th>
-                <th>Latitude</th>
+                <th>City name</th>
+                <th>Min temperature</th>
+                <th>Max temperature</th>
+                <th>Distance to the entered coordinates</th>
+                <th>Weather description</th>
             </tr>
             </thead>
             <tbody>
             <?php foreach ($cities as $city) { ?>
                 <tr>
-                    <td><?php echo $city['country'] ?></td>
-                    <td><?php echo $city['zip'] ?></td>
-                    <td><?php echo $city['city'] ?></td>
-                    <td><?php echo $city['longitude'] ?></td>
-                    <td><?php echo $city['latitude'] ?></td>
+                    <td><span><?php echo $city['city'] ?></span></td>
+                    <td><span><?php echo $city['tempMin'] . '°'  ?></span></td>
+                    <td><span><?php echo $city['tempMax'] . '°' ?></span></td>
+                    <td><span><?php echo 'todo - distance' ?></span></td>
+                    <td>
+                        <div class="description">
+                            <img src="<?php echo $city['iconUrl'] ?>">
+                            <span><?php echo $city['description'] ?></span>
+                        </div>
+
+                    </td>
                 </tr>
             <?php }  ?>
             </tbody>

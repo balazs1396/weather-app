@@ -18,3 +18,13 @@
     padding: 10px;
     text-shadow: 1px 1px 1px #fff;
 }
+
+.description span {
+    vertical-align: middle;
+}
+
+img {
+    width: 45px;
+    height: 45px;
+    vertical-align: middle;
+}
