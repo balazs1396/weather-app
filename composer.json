@@ -1,0 +1,18 @@
+{
+    "name": "balazs1396/weather-app",
+    "authors": [
+        {
+            "name": "Balazs Szedlacsek",
+            "email": "balazs13965@gmail.com"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "psr-0": {
+            "": [
+                "controllers/",
+                "services/", "./"]
+        }
+    }
+}
