@@ -9,7 +9,6 @@ class FileProcessor
         $contents = file_get_contents($file);
         $cityRows = explode("\n", $contents);
 
-        $header = $cityRows[0];
         unset($cityRows[0]);
 
         $cities = [];

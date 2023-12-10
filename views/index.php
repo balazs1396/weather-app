@@ -8,6 +8,16 @@
     </head>
 
     <body>
+
+        <div class="form">
+            <h1>Search by coordinates</h1>
+            <form>
+                <input type="text" name="latitude" placeholder="Latitude" />
+                <input type="text" name="longitude" placeholder="Longitude" />
+                <input type="submit" value="Get details" />
+            </form>
+        </div>
+
         <table class="table">
             <thead><!DOCTYPE html>
             <tr>
@@ -21,10 +31,10 @@
             <tbody>
             <?php foreach ($cities as $city) { ?>
                 <tr>
-                    <td><span><?php echo $city['city'] ?></span></td>
+                    <td><span><?php echo $city['cityName'] ?></span></td>
                     <td><span><?php echo $city['tempMin'] . '°'  ?></span></td>
                     <td><span><?php echo $city['tempMax'] . '°' ?></span></td>
-                    <td><span><?php echo 'todo - distance' ?></span></td>
+                    <td><span><?php echo $city['distance'] . ($city['distance'] ? ' Km' : '') ?></span></td>
                     <td>
                         <div class="description">
                             <img src="<?php echo $city['iconUrl'] ?>">
@@ -36,6 +46,5 @@
             <?php }  ?>
             </tbody>
         </table>
-
     </body>
 </html>

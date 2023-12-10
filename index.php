@@ -7,16 +7,18 @@ $dotenv->load();
 
 // Define the routes array
 $routes = array(
-    '//' => array('IndexController', 'index')
+    '/' => array('IndexController', 'index')
 );
 
 foreach ($routes as $url => $action) {
 
-    if ($_SERVER['REQUEST_URI'] . '/' === $url) {
+    $baseUri = explode('?', $_SERVER['REQUEST_URI']);
+
+    if ($baseUri[0] === $url) {
 
         // Run this action, passing the parameters.
         $controller = new $action[0];
-        $controller->{$action[1]}();
+        $controller->{$action[1]}($baseUri[1] ?? null);
 
         break;
     }

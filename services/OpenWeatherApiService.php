@@ -31,6 +31,7 @@ class OpenWeatherApiService
         $details = json_decode($client->get($url)->getBody()->getContents());
 
         return new WeatherDetails(
+            $details->name,
             "https://openweathermap.org/img/wn/" . $details->weather[0]->icon . "@2x.png",
             $details->weather[0]->description,
             $details->main->temp_min,

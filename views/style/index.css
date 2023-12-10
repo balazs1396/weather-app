@@ -1,3 +1,11 @@
+body {
+    max-width: 800px;
+    font: 95% Arial, Helvetica, sans-serif;
+    margin: 10px auto;
+    padding: 16px;
+    background: #F7F7F7;
+}
+
 .table {
     border: solid 1px #DDEEEE;
     border-collapse: collapse;
@@ -27,4 +35,33 @@ img {
     width: 45px;
     height: 45px;
     vertical-align: middle;
+}
+
+.form {
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.form h1 {
+    background: #DDEEEE;
+    padding: 2px 0;
+    font-size: 140%;
+    font-weight: 300;
+    text-align: center;
+    color: #336B6B;
+    margin: -16px -16px 16px -16px;
+}
+
+.form input[type="submit"] {
+    box-sizing: border-box;
+    background: #DDEEEE;
+    border-bottom: 2px solid #DDEEEE;
+    border-top-style: none;
+    border-right-style: none;
+    border-left-style: none;
+    color: #336B6B;
+}
+
+.form input[type="submit"]:hover {
+    background: #DDEEAA;
 }
